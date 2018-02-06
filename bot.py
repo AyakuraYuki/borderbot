@@ -232,8 +232,10 @@ def initialize(config):
             return
         channel = ctx.message.channel
         await bot.say(texts['purge_warning'])
+
         def confirm(msg):
             return msg in ['y', 'n']
+
         for _ in range(3):
             resp = await bot.wait_for_message(author=ctx.message.author, check=confirm)
             if resp == 'y':
@@ -243,7 +245,6 @@ def initialize(config):
                 return
         deleted = await bot.purge(channel)
         logger.info(f'Deleted {len(deleted)} message(s) from channel {channel.name}')
-
 
     return bot
 
